@@ -8,19 +8,19 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textSize="40dp"
-    local:MvxBind="Text Hello"
+    local:MvxBind="Text Hello, Mode=OneWayToSource"
     />
   <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textSize="40dp"
-    local:MvxBind="Text Hello"
+    local:MvxBind="Text Hello, Mode=OneWay"
     />
   <EditText
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:inputType="numberDecimal"
-    local:MvxBind="Text SliderValue"
+    local:MvxBind="Text SliderValue, Mode=TwoWay"
     />
   <SeekBar
     android:layout_width="fill_parent"
