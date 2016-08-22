@@ -16,4 +16,21 @@
     android:textSize="40dp"
     local:MvxBind="Text Hello"
     />
+  <EditText
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:inputType="numberDecimal"
+    local:MvxBind="Text SliderValue"
+    />
+  <SeekBar
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    local:MvxBind="Progress SliderValue"
+    />
+  <Button
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    local:MvxBind="Click ButtonCommand"
+    android:text="Click me!!!"
+    />
 </LinearLayout>

@@ -1,4 +1,7 @@
 using MvvmCross.Core.ViewModels;
+using System;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace MvvmCrossDemo.Core.ViewModels
 {
@@ -10,6 +13,27 @@ namespace MvvmCrossDemo.Core.ViewModels
         { 
             get { return _hello; }
             set { SetProperty (ref _hello, value); }
+        }
+
+        private double sliderValue;
+
+        public double SliderValue
+        {
+            get { return sliderValue; }
+            set
+            {
+                SetProperty(ref sliderValue, value);
+            }
+        }
+
+        public ICommand ButtonCommand { get; private set; }
+
+        public FirstViewModel()
+        {
+            ButtonCommand = new MvxCommand(() =>
+            {
+                Hello = "Button has been pressed!!!";
+            });
         }
     }
 }
