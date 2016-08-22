@@ -12,7 +12,14 @@ namespace MvvmCrossDemo.Core.ViewModels
         public string Hello
         { 
             get { return _hello; }
-            set { SetProperty (ref _hello, value); }
+            set
+            {
+                if (value!= null && value!= _hello)
+                {
+                    _hello = value;
+                    RaisePropertyChanged(() => Hello);
+                }
+            }
         }
 
         private double sliderValue;
