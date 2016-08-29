@@ -2,35 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="fill_parent">
+  <TextView 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:text="Add a Unit Code below"
+  />
   <EditText
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:textSize="40dp"
-    local:MvxBind="Text Hello, Mode=OneWayToSource"
-    />
-  <TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:textSize="40dp"
-    local:MvxBind="Text Hello, Mode=OneWay"
+    android:hint="UnitCode"
+    local:MvxBind="Text UnitCode"
     />
   <EditText
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:inputType="numberDecimal"
-    local:MvxBind="Text SliderValue, Mode=TwoWay"
-    />
-  <SeekBar
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    local:MvxBind="Progress SliderValue"
+    android:textSize="40dp"
+    android:hint="UnitName"
+    local:MvxBind="Text UnitName"
     />
   <Button
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     local:MvxBind="Click ButtonCommand"
-    android:text="Click me!!!"
+    android:text="Click to Add"
     />
+ 
+  <Mvx.MvxListView
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    local:MvxItemTemplate="@layout/unitcodeitemlayout"
+    local:MvxBind="ItemsSource UnitCodes; ItemClick SelectUnitCommand"/>
 </LinearLayout>

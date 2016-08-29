@@ -1,46 +1,84 @@
 using MvvmCross.Core.ViewModels;
+using MvvmCrossDemo.Core.Models;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
 namespace MvvmCrossDemo.Core.ViewModels
 {
-    public class FirstViewModel 
+    public class FirstViewModel
         : MvxViewModel
     {
-        private string _hello = "Hello MvvmCross";
-        public string Hello
-        { 
-            get { return _hello; }
+
+        private ObservableCollection<Unit> unitCodes = new ObservableCollection<Unit>()
+        {
+            new Unit("IAB330","MobileAppDevelopement") ,
+            new Unit() { UnitCode="IAB230",UnitName="UbiquitousComputing"}
+        };
+        public ObservableCollection<Unit> UnitCodes
+        {
+            get { return unitCodes; }
+            set { SetProperty(ref unitCodes, value); }
+        }
+        private string unitCode;
+        public string UnitCode
+        {
+            get { return unitCode; }
             set
             {
-                if (value!= null && value!= _hello)
+                if (value != null)
                 {
-                    _hello = value;
-                    RaisePropertyChanged(() => Hello);
+                    SetProperty(ref unitCode, value); 
                 }
             }
         }
 
-        private double sliderValue;
-
-        public double SliderValue
+        private string unitName;
+        public string UnitName
         {
-            get { return sliderValue; }
+            get { return unitName; }
             set
             {
-                SetProperty(ref sliderValue, value);
+                if (value != null)
+                {
+                    SetProperty(ref unitName, value);
+                }
             }
         }
 
-        public ICommand ButtonCommand { get; private set; }
 
+        public ICommand ButtonCommand { get; private set; }
+        public ICommand SelectUnitCommand { get; private set; }
         public FirstViewModel()
         {
             ButtonCommand = new MvxCommand(() =>
             {
-                Hello = "Button has been pressed!!!";
+                AddUnit(new Unit(UnitCode, UnitName));
+                RaisePropertyChanged(()=>UnitCodes);
             });
+
+            SelectUnitCommand = new MvxCommand<Unit>(unit => 
+            {
+                UnitCode = unit.UnitCode;
+                UnitName = unit.UnitName;
+            });
+        }
+
+        public void AddUnit(Unit unit)
+        {
+            if (unit.UnitCode != null && unit.UnitName != null)
+            {
+                if (unit.UnitName.Trim() != string.Empty && unit.UnitCode.Trim() != string.Empty)
+                {
+                    UnitCodes.Add(unit);
+                }
+                else
+                {
+                    UnitName = UnitName.Trim();
+                    UnitCode = UnitCode.Trim();
+                }
+            }
         }
     }
 }
