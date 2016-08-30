@@ -35,6 +35,7 @@ namespace MvvmCrossDemo.Core.ViewModels
 
         public ICommand ButtonCommand { get; private set; }
 
+
         public FirstViewModel()
         {
             ButtonCommand = new MvxCommand(() =>
