@@ -11,11 +11,7 @@ namespace MvvmCrossDemo.Core.ViewModels
         : MvxViewModel
     {
 
-        private ObservableCollection<Unit> unitCodes = new ObservableCollection<Unit>()
-        {
-            new Unit("IAB330","MobileAppDevelopement") ,
-            new Unit() { UnitCode="IAB230",UnitName="UbiquitousComputing"}
-        };
+        private ObservableCollection<Unit> unitCodes;
         public ObservableCollection<Unit> UnitCodes
         {
             get { return unitCodes; }
@@ -52,6 +48,11 @@ namespace MvvmCrossDemo.Core.ViewModels
         public ICommand SelectUnitCommand { get; private set; }
         public FirstViewModel()
         {
+            UnitCodes = new ObservableCollection<Unit>()
+        {
+            new Unit("IAB330","MobileAppDevelopement") ,
+            new Unit() { UnitCode="IAB230",UnitName="UbiquitousComputing"}
+        };
             ButtonCommand = new MvxCommand(() =>
             {
                 AddUnit(new Unit(UnitCode, UnitName));
