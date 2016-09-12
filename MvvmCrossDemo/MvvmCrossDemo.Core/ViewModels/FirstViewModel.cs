@@ -1,85 +1,68 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCrossDemo.Core.Models;
 using MvvmCrossDemo.Core.Models.NavigationParams;
+using MvvmCrossDemo.Core.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace MvvmCrossDemo.Core.ViewModels
 {
     public class FirstViewModel
         : MvxViewModel
     {
+        private ObservableCollection<LocationAutoCompleteResult> locations;
 
-        private ObservableCollection<Unit> unitCodes;
-        public ObservableCollection<Unit> UnitCodes
+        public ObservableCollection<LocationAutoCompleteResult> Locations
         {
-            get { return unitCodes; }
-            set { SetProperty(ref unitCodes, value); }
+            get { return locations; }
+            set { SetProperty(ref locations, value); }
         }
-        private string unitCode;
-        public string UnitCode
+
+        private string location;
+        public string Location
         {
-            get { return unitCode; }
-            set
-            {
-                if (value != null)
+            get { return location; }
+            set {
+                SetProperty(ref location, value); }
+        }
+
+        private string searchTerm;
+
+        public string SearchTerm
+        {
+            get { return searchTerm; }
+            set { SetProperty(ref searchTerm, value);
+                if (searchTerm.Length > 3)
                 {
-                    SetProperty(ref unitCode, value); 
+                    SearchLocations(searchTerm);
                 }
             }
         }
 
-        private string unitName;
-        public string UnitName
-        {
-            get { return unitName; }
-            set
-            {
-                if (value != null)
-                {
-                    SetProperty(ref unitName, value);
-                }
-            }
-        }
 
-
-        public ICommand ButtonCommand { get; private set; }
-        public ICommand SelectUnitCommand { get; private set; }
         public FirstViewModel()
         {
-            UnitCodes = new ObservableCollection<Unit>()
-        {
-            new Unit("IAB330","MobileAppDevelopement") ,
-            new Unit() { UnitCode="IAB230",UnitName="UbiquitousComputing"}
-        };
-            ButtonCommand = new MvxCommand(() =>
-            {
-                AddUnit(new Unit(UnitCode, UnitName));
-                RaisePropertyChanged(()=>UnitCodes);
-            });
-
-            SelectUnitCommand = new MvxCommand<Unit>(unit => 
-            {
-                ShowViewModel<SecondViewModel>(new SecondParameters() { SelectedUnitCode = unit.UnitCode, SelectedUnitName = unit.UnitName });
-            });
+            Locations = new ObservableCollection<LocationAutoCompleteResult>();
         }
 
-        public void AddUnit(Unit unit)
+
+        public async void SearchLocations(string searchTerm)
         {
-            if (unit.UnitCode != null && unit.UnitName != null)
+            WeatherService weatherService = new WeatherService();
+            Locations.Clear();
+            var locationResults = await weatherService.GetLocations(searchTerm);
+
+            foreach (var item in locationResults)
             {
-                if (unit.UnitName.Trim() != string.Empty && unit.UnitCode.Trim() != string.Empty)
-                {
-                    UnitCodes.Add(unit);
-                }
-                else
-                {
-                    UnitName = UnitName.Trim();
-                    UnitCode = UnitCode.Trim();
-                }
+                Locations.Add(item);
             }
         }
+      
     }
 }

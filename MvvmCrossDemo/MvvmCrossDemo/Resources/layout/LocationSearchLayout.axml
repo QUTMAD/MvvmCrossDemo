@@ -7,9 +7,6 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        local:MvxBind="Text UnitCode" />
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        local:MvxBind="Text UnitName" />
+        android:textSize="20dp"
+        local:MvxBind="Text LocalizedName" />
 </LinearLayout>

@@ -7,27 +7,14 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add a Unit Code below" />
-    <EditText
+        android:text="Search for a location below" />
+  <Mvx.MvxAutoCompleteTextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
         android:hint="UnitCode"
-        local:MvxBind="Text UnitCode" />
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        android:hint="UnitName"
-        local:MvxBind="Text UnitName" />
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        local:MvxBind="Click ButtonCommand"
-        android:text="Click to Add" />
-    <Mvx.MvxListView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        local:MvxItemTemplate="@layout/unitcodeitemlayout"
-        local:MvxBind="ItemsSource UnitCodes; ItemClick SelectUnitCommand" />
+        local:MvxBind="Text SearchTerm; ItemsSource Locations; SelectedObject Location.Key" 
+        local:MvxItemTemplate="@layout/locationsearchlayout"
+        />
+   
 </LinearLayout>
