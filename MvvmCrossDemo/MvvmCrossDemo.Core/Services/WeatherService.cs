@@ -45,7 +45,7 @@ namespace MvvmCrossDemo.Core.Services
 
         public async Task<Forecast> GetForecast(string locationKey)
         {
-            WebRequest request = WebRequest.CreateHttp(String.Format("{0}{1}?apikey={2}"
+            WebRequest request = WebRequest.CreateHttp(String.Format("{0}{1}?apikey={2}&metric=true"
                , WeatherApp.ForecastEndpoint
                , WebUtility.HtmlEncode(locationKey)
                , WeatherApp.ApiKey

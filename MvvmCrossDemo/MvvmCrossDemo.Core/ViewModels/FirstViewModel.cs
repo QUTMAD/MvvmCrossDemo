@@ -1,6 +1,5 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCrossDemo.Core.Models;
-using MvvmCrossDemo.Core.Models.NavigationParams;
 using MvvmCrossDemo.Core.Services;
 using System;
 using System.Collections.ObjectModel;

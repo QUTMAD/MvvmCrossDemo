@@ -1,6 +1,5 @@
 ﻿using MvvmCross.Core.ViewModels;
 using MvvmCrossDemo.Core.Models;
-using MvvmCrossDemo.Core.Models.NavigationParams;
 using MvvmCrossDemo.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -55,8 +54,8 @@ namespace MvvmCrossDemo.Core.ViewModels
             var weatherResult = await weatherService.GetForecast(selectedLocation.Key);
             var min = weatherResult.DailyForecasts.FirstOrDefault().Temperature.Minimum.Value;
             var max = weatherResult.DailyForecasts.FirstOrDefault().Temperature.Maximum.Value;
-            MinimumTemperature = String.Format("{0} degrees Minimum", min);
-            MaximumTemperature = String.Format("{0} degrees Maximum", max);
+            MinimumTemperature = string.Format("{0} degrees Minimum", min);
+            MaximumTemperature = string.Format("{0} degrees Maximum", max);
         }
     }
 }
