@@ -42,5 +42,38 @@ namespace MvvmCrossDemo.Core.Services
                 return null;
             }
         }
+
+        public async Task<Forecast> GetForecast(string locationKey)
+        {
+            WebRequest request = WebRequest.CreateHttp(String.Format("{0}{1}?apikey={2}"
+               , WeatherApp.ForecastEndpoint
+               , WebUtility.HtmlEncode(locationKey)
+               , WeatherApp.ApiKey
+                ));
+            string responseValue = null;
+            using (var response = await request.GetResponseAsync())
+            {
+                using (var stream = response.GetResponseStream())
+                {
+                    if (stream != null)
+                    {
+                        using (var reader = new StreamReader(stream))
+                        {
+                            responseValue = await reader.ReadToEndAsync();
+                        }
+                    }
+                }
+            }
+            var sresponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Forecast>(responseValue);
+
+            if (sresponse != null)
+            {
+                return sresponse;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace MvvmCrossDemo.Core.Services
 
      
         public static string AutoCompleteEndpoint = "http://dataservice.accuweather.com/locations/v1/cities/autocomplete";
+
+        public static string ForecastEndpoint = "http://dataservice.accuweather.com/forecasts/v1/daily/1day/";
     }
 }

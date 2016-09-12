@@ -24,13 +24,7 @@ namespace MvvmCrossDemo.Core.ViewModels
             set { SetProperty(ref locations, value); }
         }
 
-        private string location;
-        public string Location
-        {
-            get { return location; }
-            set {
-                SetProperty(ref location, value); }
-        }
+
 
         private string searchTerm;
 
@@ -45,10 +39,12 @@ namespace MvvmCrossDemo.Core.ViewModels
             }
         }
 
+        public ICommand SelectLocationCommand { get; private set; }
 
         public FirstViewModel()
         {
             Locations = new ObservableCollection<LocationAutoCompleteResult>();
+            SelectLocationCommand = new MvxCommand<LocationAutoCompleteResult>(selectedLocation => ShowViewModel<SecondViewModel>(selectedLocation));
         }
 
 

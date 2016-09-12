@@ -4,16 +4,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="fill_parent">
-    <TextView
+    <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Search for a location below" />
-  <Mvx.MvxAutoCompleteTextView
+        android:hint="Search for a location"
+        local:MvxBind="Text SearchTerm"/>
+  <MvxListView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        android:hint="UnitCode"
-        local:MvxBind="Text SearchTerm; ItemsSource Locations; SelectedObject Location.Key" 
+        local:MvxBind="ItemsSource Locations; ItemClick SelectLocationCommand" 
         local:MvxItemTemplate="@layout/locationsearchlayout"
         />
    
