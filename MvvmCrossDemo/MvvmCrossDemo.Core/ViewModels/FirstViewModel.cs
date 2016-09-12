@@ -52,8 +52,8 @@ namespace MvvmCrossDemo.Core.ViewModels
             WeatherService weatherService = new WeatherService();
             Locations.Clear();
             var locationResults = await weatherService.GetLocations(searchTerm);
-
-            foreach (var item in locationResults)
+            var bestLocationResults = locationResults.Where(location => location.Rank > 80);
+            foreach (var item in bestLocationResults)
             {
                 Locations.Add(item);
             }
