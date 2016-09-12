@@ -1,5 +1,6 @@
 using MvvmCross.Core.ViewModels;
 using MvvmCrossDemo.Core.Models;
+using MvvmCrossDemo.Core.Models.NavigationParams;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -61,8 +62,7 @@ namespace MvvmCrossDemo.Core.ViewModels
 
             SelectUnitCommand = new MvxCommand<Unit>(unit => 
             {
-                UnitCode = unit.UnitCode;
-                UnitName = unit.UnitName;
+                ShowViewModel<SecondViewModel>(new SecondParameters() { SelectedUnitCode = unit.UnitCode, SelectedUnitName = unit.UnitName });
             });
         }
 
