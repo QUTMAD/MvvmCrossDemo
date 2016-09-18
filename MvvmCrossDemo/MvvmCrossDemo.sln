@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCrossDemo", "MvvmCrossD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCrossDemo.Core", "MvvmCrossDemo.Core\MvvmCrossDemo.Core.csproj", "{9FF4B3A3-9EBF-4FD9-8A21-FD1F5BF2C922}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMobileApp", "WeatherMobileApp\WeatherMobileApp.csproj", "{7BDF4CEB-A11F-4876-8599-584B5568F107}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{9FF4B3A3-9EBF-4FD9-8A21-FD1F5BF2C922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FF4B3A3-9EBF-4FD9-8A21-FD1F5BF2C922}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FF4B3A3-9EBF-4FD9-8A21-FD1F5BF2C922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDF4CEB-A11F-4876-8599-584B5568F107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDF4CEB-A11F-4876-8599-584B5568F107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDF4CEB-A11F-4876-8599-584B5568F107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDF4CEB-A11F-4876-8599-584B5568F107}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
