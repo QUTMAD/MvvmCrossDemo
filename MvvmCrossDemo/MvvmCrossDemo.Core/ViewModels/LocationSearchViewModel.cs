@@ -17,6 +17,8 @@ namespace MvvmCrossDemo.Core.ViewModels
     public class LocationSearchViewModel
         : MvxViewModel
     {
+        private ISqlite sqlite;
+        private IDialogService dialog;
         private ObservableCollection<LocationAutoCompleteResult> locations;
 
         public ObservableCollection<LocationAutoCompleteResult> Locations
@@ -40,15 +42,38 @@ namespace MvvmCrossDemo.Core.ViewModels
 
         public ICommand SelectLocationCommand { get; private set; }
 
-        public LocationSearchViewModel(ISqlite sqlite)
+        public LocationSearchViewModel(ISqlite sqlite, IDialogService dialog)
         {
+            this.sqlite = sqlite;
+            this.dialog = dialog;
             Locations = new ObservableCollection<LocationAutoCompleteResult>();
             SelectLocationCommand = new MvxCommand<LocationAutoCompleteResult>(selectedLocation => 
             {
-                var database = new LocationsDatabase(sqlite);
-                database.InsertLocation(selectedLocation);
-                Close(this);
+                SelectLocation(selectedLocation);
             });
+        }
+
+        public async void SelectLocation(LocationAutoCompleteResult selectedLocation)
+        {
+            var database = new LocationsDatabase(sqlite);
+
+            if (!database.CheckIfExists(selectedLocation))
+            {
+                database.InsertLocation(selectedLocation);
+                Close(this); 
+            }
+            else
+            {
+                if (await dialog.Show("This location has already been added", "Location Exists", "Keep Searching", "Go Back"))
+                {
+                    SearchTerm = string.Empty;
+                    Locations.Clear();
+                }
+                else
+                {
+                    Close(this);
+                }
+            }
         }
 
         public async void SearchLocations(string searchTerm)

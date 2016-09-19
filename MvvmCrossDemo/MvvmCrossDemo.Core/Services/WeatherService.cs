@@ -64,7 +64,16 @@ namespace MvvmCrossDemo.Core.Services
                     }
                 }
             }
-            var sresponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Forecast>(responseValue);
+            Forecast sresponse;
+            try
+            {
+                sresponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Forecast>(responseValue);
+            }
+            catch (Exception)
+            {
+
+                sresponse = null;
+            }
 
             if (sresponse != null)
             {

@@ -46,7 +46,14 @@ namespace MvvmCrossDemo.Core.ViewModels
             foreach (var location in locations)
             {
                 var forecast = await weatherService.GetForecast(location.Key);
-                Forecasts.Add(new ForecastWrapper(forecast, location.LocalizedName));
+                if (forecast != null)
+                {
+                    Forecasts.Add(new ForecastWrapper(forecast, location.LocalizedName)); 
+                }
+                else
+                {
+                    database.DeleteLocation(location.Id);
+                }
             }
         }
     }

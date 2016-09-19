@@ -5,6 +5,7 @@ using MvvmCross.Platform.Platform;
 using MvvmCross.Platform;
 using MvvmCrossDemo.Core.Interfaces;
 using MvvmCrossDemo.Droid.Database;
+using MvvmCrossDemo.Droid.Services;
 
 namespace MvvmCrossDemo.Droid
 {
@@ -27,6 +28,7 @@ namespace MvvmCrossDemo.Droid
         protected override void InitializeFirstChance()
         {
             Mvx.LazyConstructAndRegisterSingleton<ISqlite, SqliteDroid>();
+            Mvx.LazyConstructAndRegisterSingleton<IDialogService, DialogService>();
             base.InitializeFirstChance();
         }
     }

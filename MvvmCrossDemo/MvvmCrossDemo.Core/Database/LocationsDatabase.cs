@@ -34,6 +34,14 @@ namespace MvvmCrossDemo.Core.Database
             database.Commit();
             return num;
         }
+
+        public bool CheckIfExists(LocationAutoCompleteResult location)
+        {
+            var exists =  database.Table<LocationAutoCompleteResult>()
+                .Where(x=> x.LocalizedName == location.LocalizedName 
+                || x.Key == location.Key).Any();
+            return exists;
+        }
       
     }
 }
