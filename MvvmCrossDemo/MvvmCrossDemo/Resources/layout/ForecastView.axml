@@ -7,6 +7,7 @@
   <Button
     android:layout_width="fill_parent"
      android:layout_height="wrap_content"
+    android:text="Add a new location"
     local:MvxBind="Click AddNewLocationCommand"/>
   <MvxListView
      android:layout_width="fill_parent"
