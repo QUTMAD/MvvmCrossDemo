@@ -14,7 +14,7 @@ using MvvmCrossDemo.Core.ViewModels;
 
 namespace MvvmCrossDemo.Droid.Views
 {
-    [Activity(Label = "SecondView")]
+    [Activity(Label = "Forecast")]
     public class ForecastView : MvxActivity
     {
 

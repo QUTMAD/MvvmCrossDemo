@@ -7,7 +7,7 @@ using MvvmCrossDemo.Core.ViewModels;
 
 namespace MvvmCrossDemo.Droid.Views
 {
-    [Activity(Label = "View for FirstViewModel")]
+    [Activity(Label = "Location Search")]
     public class LocationSearchView : MvxActivity
     {
         protected override void OnCreate(Bundle bundle)
