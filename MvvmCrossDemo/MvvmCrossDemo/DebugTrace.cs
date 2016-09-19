@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using MvvmCross.Platform.Platform;
 
-namespace MvvmCrossDemo
+namespace MvvmCrossDemo.Droid
 {
     public class DebugTrace : IMvxTrace
     {

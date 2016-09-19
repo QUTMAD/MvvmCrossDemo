@@ -12,6 +12,24 @@ namespace MvvmCrossDemo.Core.Models
         [JsonProperty("Headline")]
         public Headline HeadLine { get; set; }
         public List<DailyForecast> DailyForecasts { get; set; }
+        public string MinimumTemperature
+        {
+            get
+            {
+                return string.Format("Minimum temperature today is {0}{1}"
+                , DailyForecasts.FirstOrDefault().Temperature.Minimum.Value.ToString()
+                , DailyForecasts.FirstOrDefault().Temperature.Minimum.Unit);
+            }
+        }
+        public string MaximumTemperature
+        {
+            get
+            {
+                return string.Format("Maximum temperature today is {0}{1}"
+                , DailyForecasts.FirstOrDefault().Temperature.Maximum.Value.ToString()
+                , DailyForecasts.FirstOrDefault().Temperature.Maximum.Unit);
+            }
+        }
         public class Headline
         {
             public string EffectiveDate { get; set; }

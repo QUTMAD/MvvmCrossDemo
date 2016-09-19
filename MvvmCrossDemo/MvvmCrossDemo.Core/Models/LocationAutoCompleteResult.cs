@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SQLite.Net.Attributes;
 namespace MvvmCrossDemo.Core.Models
 {
     public class LocationAutoCompleteResult
     {
+        [PrimaryKey,AutoIncrement]
+        public int Id { get; set; }
         [JsonProperty("Version")]
         public int WeatherVersion { get; set; }
         public string Key { get; set; }

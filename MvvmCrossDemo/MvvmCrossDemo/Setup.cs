@@ -2,8 +2,11 @@ using Android.Content;
 using MvvmCross.Droid.Platform;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
+using MvvmCross.Platform;
+using MvvmCrossDemo.Core.Interfaces;
+using MvvmCrossDemo.Droid.Database;
 
-namespace MvvmCrossDemo
+namespace MvvmCrossDemo.Droid
 {
     public class Setup : MvxAndroidSetup
     {
@@ -19,6 +22,12 @@ namespace MvvmCrossDemo
         protected override IMvxTrace CreateDebugTrace()
         {
             return new DebugTrace();
+        }
+
+        protected override void InitializeFirstChance()
+        {
+            Mvx.LazyConstructAndRegisterSingleton<ISqlite, SqliteDroid>();
+            base.InitializeFirstChance();
         }
     }
 }

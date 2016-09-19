@@ -9,12 +9,11 @@
         android:layout_height="wrap_content"
         android:hint="Search for a location"
         local:MvxBind="Text SearchTerm"/>
-  <MvxListView
+    <MvxListView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
         local:MvxBind="ItemsSource Locations; ItemClick SelectLocationCommand" 
         local:MvxItemTemplate="@layout/locationsearchlayout"
         />
-   
 </LinearLayout>

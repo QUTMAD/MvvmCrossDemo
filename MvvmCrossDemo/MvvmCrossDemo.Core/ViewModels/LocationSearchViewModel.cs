@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MvvmCrossDemo.Core.Interfaces;
+using MvvmCrossDemo.Core.Database;
 
 namespace MvvmCrossDemo.Core.ViewModels
 {
-    public class FirstViewModel
+    public class LocationSearchViewModel
         : MvxViewModel
     {
         private ObservableCollection<LocationAutoCompleteResult> locations;
@@ -22,8 +24,6 @@ namespace MvvmCrossDemo.Core.ViewModels
             get { return locations; }
             set { SetProperty(ref locations, value); }
         }
-
-
 
         private string searchTerm;
 
@@ -40,12 +40,16 @@ namespace MvvmCrossDemo.Core.ViewModels
 
         public ICommand SelectLocationCommand { get; private set; }
 
-        public FirstViewModel()
+        public LocationSearchViewModel(ISqlite sqlite)
         {
             Locations = new ObservableCollection<LocationAutoCompleteResult>();
-            SelectLocationCommand = new MvxCommand<LocationAutoCompleteResult>(selectedLocation => ShowViewModel<SecondViewModel>(selectedLocation));
+            SelectLocationCommand = new MvxCommand<LocationAutoCompleteResult>(selectedLocation => 
+            {
+                var database = new LocationsDatabase(sqlite);
+                database.InsertLocation(selectedLocation);
+                Close(this);
+            });
         }
-
 
         public async void SearchLocations(string searchTerm)
         {
@@ -58,6 +62,5 @@ namespace MvvmCrossDemo.Core.ViewModels
                 Locations.Add(item);
             }
         }
-      
     }
 }

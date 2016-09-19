@@ -5,16 +5,15 @@ using System;
 using MvvmCross.Core.ViewModels;
 using MvvmCrossDemo.Core.ViewModels;
 
-namespace MvvmCrossDemo.Views
+namespace MvvmCrossDemo.Droid.Views
 {
-    [MvxViewFor(typeof(FirstViewModel))]
     [Activity(Label = "View for FirstViewModel")]
-    public class FirstView : MvxActivity
+    public class LocationSearchView : MvxActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.FirstView);
+            SetContentView(Resource.Layout.LocationSearchView);
         }
     }
 }

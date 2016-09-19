@@ -2,7 +2,7 @@ using Android.App;
 using Android.Content.PM;
 using MvvmCross.Droid.Views;
 
-namespace MvvmCrossDemo
+namespace MvvmCrossDemo.Droid
 {
     [Activity(
         Label = "MvvmCrossDemo"

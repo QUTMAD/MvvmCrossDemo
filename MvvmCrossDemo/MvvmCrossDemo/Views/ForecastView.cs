@@ -10,17 +10,26 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Views;
+using MvvmCrossDemo.Core.ViewModels;
 
-namespace MvvmCrossDemo.Views
+namespace MvvmCrossDemo.Droid.Views
 {
     [Activity(Label = "SecondView")]
-    public class SecondView : MvxActivity
+    public class ForecastView : MvxActivity
     {
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.SecondView);
+            SetContentView(Resource.Layout.ForecastView);
             // Create your application here
+        }
+        protected override void OnResume()
+        {
+            var vm = (ForecastViewModel)ViewModel;
+            vm.OnResume();
+            base.OnResume();
         }
     }
 }
