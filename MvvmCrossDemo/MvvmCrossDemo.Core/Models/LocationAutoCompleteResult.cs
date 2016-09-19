@@ -17,9 +17,12 @@ namespace MvvmCrossDemo.Core.Models
         public string Type { get; set; }
         public int Rank { get; set; }
         public string LocalizedName { get; set; }
-        public CountryT Country { get; set; }
+        [JsonProperty("Country")]
+        [Ignore]
+        public Country Countrie { get; set; }
+        [Ignore]
         public AdministrativeAreaT AdministrativeArea { get; set; }
-        public class CountryT
+        public class Country
         {
             public string Id { get; set; }
             public string LocalizedName { get; set; }
