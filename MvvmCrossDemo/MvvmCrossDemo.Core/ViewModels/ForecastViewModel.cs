@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using MvvmCrossDemo.Core.Database;
 using MvvmCrossDemo.Core.Interfaces;
 using MvvmCrossDemo.Core.Models;
@@ -18,10 +19,10 @@ namespace MvvmCrossDemo.Core.ViewModels
     {
         List<LocationAutoCompleteResult> locations = new List<LocationAutoCompleteResult>();
         LocationsDatabase database;
+        private ISqlite sqlite;
+        private ObservableCollection<ForecastWrapper> forecasts = new ObservableCollection<ForecastWrapper>();
 
-        private ObservableCollection<Forecast> forecasts = new ObservableCollection<Forecast>();
-
-        public ObservableCollection<Forecast> Forecasts
+        public ObservableCollection<ForecastWrapper> Forecasts
         {
             get { return forecasts; }
             set { SetProperty(ref forecasts, value); }
@@ -33,13 +34,14 @@ namespace MvvmCrossDemo.Core.ViewModels
             database = new LocationsDatabase(sqlite);
             AddNewLocationCommand = new MvxCommand(() => ShowViewModel<LocationSearchViewModel>());
         }
-
         public void OnResume()
         {
             GetForecasts();
         }
         public async void GetForecasts()
         {
+            var azuredabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
+            var azureresults = await azuredabase.GetTable<Location>().ToListAsync();
             var locations = database.GetLocations();
             var weatherService = new WeatherService();
             Forecasts.Clear();

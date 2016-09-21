@@ -12,19 +12,18 @@ using Android.Widget;
 using MvvmCrossDemo.Core.Interfaces;
 using SQLite.Net;
 using System.IO;
-
+using SQLite.Net.Platform.XamarinAndroid;
 namespace MvvmCrossDemo.Droid.Database
 {
     public class SqliteDroid : ISqlite
     {
-        public SqliteDroid() { }
         public SQLiteConnection GetConnection()
         {
             var sqliteFilename = "LocationSQLite.db3";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // Documents folder
             var path = Path.Combine(documentsPath, sqliteFilename);
             // Create the connection
-            var conn = new SQLiteConnection(new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid(), path);
+            var conn = new SQLiteConnection(new SQLitePlatformAndroid(), path);
             // Return the database connection
             return conn;
         }

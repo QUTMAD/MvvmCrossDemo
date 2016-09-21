@@ -9,7 +9,7 @@ namespace MvvmCrossDemo.Core.Models
 {
     public class LocationAutoCompleteResult
     {
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [JsonProperty("Version")]
         public int WeatherVersion { get; set; }

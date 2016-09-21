@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using MvvmCrossDemo.Core.Interfaces;
 using MvvmCrossDemo.Core.Database;
+using MvvmCross.Platform;
 
 namespace MvvmCrossDemo.Core.ViewModels
 {
@@ -55,11 +56,18 @@ namespace MvvmCrossDemo.Core.ViewModels
 
         public async void SelectLocation(LocationAutoCompleteResult selectedLocation)
         {
+            var azuredatabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
             var database = new LocationsDatabase(sqlite);
 
             if (!database.CheckIfExists(selectedLocation))
             {
                 database.InsertLocation(selectedLocation);
+                await azuredatabase.GetTable<Location>().InsertAsync(new Location
+                {
+                    Key = selectedLocation.Key,
+                    LocalizedName = selectedLocation.LocalizedName,
+                    Rank = selectedLocation.Rank
+                });
                 Close(this); 
             }
             else

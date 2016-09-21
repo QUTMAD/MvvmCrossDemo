@@ -20,7 +20,7 @@ namespace MvvmCrossDemo.Core.Database
 
         public IEnumerable<LocationAutoCompleteResult> GetLocations()
         {
-            return (from i in database.Table<LocationAutoCompleteResult>() select i).ToList();
+            return database.Table<LocationAutoCompleteResult>().ToList();
         }
     
         public int DeleteLocation(int id)
@@ -38,8 +38,8 @@ namespace MvvmCrossDemo.Core.Database
         public bool CheckIfExists(LocationAutoCompleteResult location)
         {
             var exists =  database.Table<LocationAutoCompleteResult>()
-                .Where(x=> x.LocalizedName == location.LocalizedName 
-                || x.Key == location.Key).Any();
+                .Any(x => x.LocalizedName == location.LocalizedName
+                || x.Key == location.Key);
             return exists;
         }
       
