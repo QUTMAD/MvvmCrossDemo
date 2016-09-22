@@ -37,9 +37,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Database\LocationDatabaseAzure.cs" />
     <Compile Include="Database\LocationsDatabase.cs" />
     <Compile Include="Interfaces\IAzureDatabase.cs" />
     <Compile Include="Interfaces\IDialogService.cs" />
+    <Compile Include="Interfaces\ILocationsDatabase.cs" />
     <Compile Include="Interfaces\ISqlite.cs" />
     <Compile Include="Models\Forecast.cs" />
     <Compile Include="Models\ForecastWrapper.cs" />

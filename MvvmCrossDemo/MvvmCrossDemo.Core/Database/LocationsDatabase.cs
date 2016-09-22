@@ -6,42 +6,54 @@ using System.Text;
 using SQLite.Net;
 using MvvmCrossDemo.Core.Interfaces;
 using MvvmCrossDemo.Core.Models;
+using MvvmCross.Platform;
+using System.Threading.Tasks;
 
 namespace MvvmCrossDemo.Core.Database
 {
-    public class LocationsDatabase
+    public class LocationsDatabase : ILocationsDatabase
     {
         private SQLiteConnection database;
-        public LocationsDatabase(ISqlite sqlite)
+        public LocationsDatabase()
         {
+            var sqlite = Mvx.Resolve<ISqlite>();
             database = sqlite.GetConnection();
-            database.CreateTable<LocationAutoCompleteResult>();
+            database.CreateTable<Location>();
         }
 
-        public IEnumerable<LocationAutoCompleteResult> GetLocations()
+        public async Task<IEnumerable<Location>> GetLocations()
         {
-            return database.Table<LocationAutoCompleteResult>().ToList();
+            return database.Table<Location>().ToList();
         }
     
-        public int DeleteLocation(int id)
+        public async Task<int> DeleteLocation(object id)
         {
-            return database.Delete<LocationAutoCompleteResult>(id);
+            return database.Delete<Location>(Convert.ToInt16(id));
         }
 
-        public int InsertLocation(LocationAutoCompleteResult location)
+        public async Task<int> InsertLocation(Location location)
         {
             var num =  database.Insert(location);
             database.Commit();
             return num;
         }
 
-        public bool CheckIfExists(LocationAutoCompleteResult location)
+        public async Task<bool> CheckIfExists(Location location)
         {
-            var exists =  database.Table<LocationAutoCompleteResult>()
+            var exists =  database.Table<Location>()
                 .Any(x => x.LocalizedName == location.LocalizedName
                 || x.Key == location.Key);
             return exists;
         }
-      
+
+        public async Task<int> InsertLocation(LocationAutoCompleteResult location)
+        {
+            return await InsertLocation(new Models.Location(location));
+        }
+
+        public async Task<bool> CheckIfExists(LocationAutoCompleteResult location)
+        {
+            return await CheckIfExists(new Location(location));
+        }
     }
 }

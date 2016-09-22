@@ -18,8 +18,9 @@ namespace MvvmCrossDemo.Core.ViewModels
     public class LocationSearchViewModel
         : MvxViewModel
     {
-        private ISqlite sqlite;
-        private IDialogService dialog;
+        private readonly IDialogService dialog;
+        private readonly ILocationsDatabase locationsDatabase;
+
         private ObservableCollection<LocationAutoCompleteResult> locations;
 
         public ObservableCollection<LocationAutoCompleteResult> Locations
@@ -43,10 +44,10 @@ namespace MvvmCrossDemo.Core.ViewModels
 
         public ICommand SelectLocationCommand { get; private set; }
 
-        public LocationSearchViewModel(ISqlite sqlite, IDialogService dialog)
+        public LocationSearchViewModel(IDialogService dialog, ILocationsDatabase locationsDatabase)
         {
-            this.sqlite = sqlite;
             this.dialog = dialog;
+            this.locationsDatabase = locationsDatabase;
             Locations = new ObservableCollection<LocationAutoCompleteResult>();
             SelectLocationCommand = new MvxCommand<LocationAutoCompleteResult>(selectedLocation => 
             {
@@ -56,18 +57,11 @@ namespace MvvmCrossDemo.Core.ViewModels
 
         public async void SelectLocation(LocationAutoCompleteResult selectedLocation)
         {
-            var azuredatabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
-            var database = new LocationsDatabase(sqlite);
 
-            if (!database.CheckIfExists(selectedLocation))
+            if (!await locationsDatabase.CheckIfExists(selectedLocation))
             {
-                database.InsertLocation(selectedLocation);
-                await azuredatabase.GetTable<Location>().InsertAsync(new Location
-                {
-                    Key = selectedLocation.Key,
-                    LocalizedName = selectedLocation.LocalizedName,
-                    Rank = selectedLocation.Rank
-                });
+                await locationsDatabase.InsertLocation(selectedLocation);
+                
                 Close(this); 
             }
             else

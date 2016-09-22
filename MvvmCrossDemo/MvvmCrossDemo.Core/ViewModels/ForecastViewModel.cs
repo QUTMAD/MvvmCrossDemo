@@ -18,9 +18,8 @@ namespace MvvmCrossDemo.Core.ViewModels
     public class ForecastViewModel : MvxViewModel
     {
         List<LocationAutoCompleteResult> locations = new List<LocationAutoCompleteResult>();
-        LocationsDatabase database;
-        private ISqlite sqlite;
         private ObservableCollection<ForecastWrapper> forecasts = new ObservableCollection<ForecastWrapper>();
+        private readonly ILocationsDatabase locationsDatabase;
 
         public ObservableCollection<ForecastWrapper> Forecasts
         {
@@ -29,9 +28,9 @@ namespace MvvmCrossDemo.Core.ViewModels
         }
 
         public ICommand AddNewLocationCommand { get; private set; }
-        public ForecastViewModel(ISqlite sqlite)
+        public ForecastViewModel(ILocationsDatabase locationsDatabase)
         {
-            database = new LocationsDatabase(sqlite);
+            this.locationsDatabase = locationsDatabase;
             AddNewLocationCommand = new MvxCommand(() => ShowViewModel<LocationSearchViewModel>());
         }
         public void OnResume()
@@ -40,9 +39,7 @@ namespace MvvmCrossDemo.Core.ViewModels
         }
         public async void GetForecasts()
         {
-            var azuredabase = Mvx.Resolve<IAzureDatabase>().GetMobileServiceClient();
-            var azureresults = await azuredabase.GetTable<Location>().ToListAsync();
-            var locations = database.GetLocations();
+            var locations = await locationsDatabase.GetLocations();
             var weatherService = new WeatherService();
             Forecasts.Clear();
             foreach (var location in locations)
@@ -54,7 +51,7 @@ namespace MvvmCrossDemo.Core.ViewModels
                 }
                 else
                 {
-                    database.DeleteLocation(location.Id);
+                    locationsDatabase.DeleteLocation(location.Id);
                 }
             }
         }
