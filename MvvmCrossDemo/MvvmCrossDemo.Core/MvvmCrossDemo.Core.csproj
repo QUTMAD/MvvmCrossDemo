@@ -41,10 +41,12 @@
     <Compile Include="Database\LocationsDatabase.cs" />
     <Compile Include="Interfaces\IAzureDatabase.cs" />
     <Compile Include="Interfaces\IDialogService.cs" />
+    <Compile Include="Interfaces\IGeoCoder.cs" />
     <Compile Include="Interfaces\ILocationsDatabase.cs" />
     <Compile Include="Interfaces\ISqlite.cs" />
     <Compile Include="Models\Forecast.cs" />
     <Compile Include="Models\ForecastWrapper.cs" />
+    <Compile Include="Models\GeoLocation.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationAutoCompleteResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Services\WeatherService.cs" />
     <Compile Include="ViewModels\LocationSearchViewModel.cs" />
     <Compile Include="ViewModels\ForecastViewModel.cs" />
+    <Compile Include="ViewModels\WeatherMapViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

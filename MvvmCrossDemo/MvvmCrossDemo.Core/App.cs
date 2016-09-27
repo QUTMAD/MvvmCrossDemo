@@ -11,7 +11,7 @@ namespace MvvmCrossDemo.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.ForecastViewModel>();
+            RegisterAppStart<ViewModels.WeatherMapViewModel>();
         }
     }
 }

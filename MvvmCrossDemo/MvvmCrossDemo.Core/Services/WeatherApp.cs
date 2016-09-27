@@ -8,7 +8,7 @@ namespace MvvmCrossDemo.Core.Services
 {
     public static class WeatherApp
     {
-        public static string ApiKey = "Aooa3DdZXWk4Lnlm0L3IBMGKEfJZz7Cp";
+        public static string ApiKey = "nPw9SGrOEy51dq15WPaBUjBwBEDAAwW0";
 
      
         public static string AutoCompleteEndpoint = "http://dataservice.accuweather.com/locations/v1/cities/autocomplete";

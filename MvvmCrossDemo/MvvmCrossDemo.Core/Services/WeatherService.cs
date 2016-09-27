@@ -1,6 +1,8 @@
 ﻿using MvvmCrossDemo.Core.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -51,25 +53,33 @@ namespace MvvmCrossDemo.Core.Services
                , WeatherApp.ApiKey
                 ));
             string responseValue = null;
-            using (var response = await request.GetResponseAsync())
+            try
             {
-                using (var stream = response.GetResponseStream())
+                using (var response = await request.GetResponseAsync())
                 {
-                    if (stream != null)
+                    using (var stream = response.GetResponseStream())
                     {
-                        using (var reader = new StreamReader(stream))
+                        if (stream != null)
                         {
-                            responseValue = await reader.ReadToEndAsync();
+                            using (var reader = new StreamReader(stream))
+                            {
+                                responseValue = await reader.ReadToEndAsync();
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+          
             Forecast sresponse;
             try
             {
-                sresponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Forecast>(responseValue);
+                sresponse = Newtonsoft.Json.JsonConvert.DeserializeObject<Forecast>(responseValue, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 sresponse = null;

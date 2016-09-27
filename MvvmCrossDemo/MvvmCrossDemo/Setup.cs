@@ -7,6 +7,7 @@ using MvvmCrossDemo.Core.Interfaces;
 using MvvmCrossDemo.Droid.Database;
 using MvvmCrossDemo.Droid.Services;
 using MvvmCrossDemo.Core.Database;
+using MvvmCrossDemo.Droid.Maps;
 
 namespace MvvmCrossDemo.Droid
 {
@@ -33,6 +34,7 @@ namespace MvvmCrossDemo.Droid
             Mvx.LazyConstructAndRegisterSingleton<IAzureDatabase, AzureDatabase>();
 
             Mvx.LazyConstructAndRegisterSingleton<ILocationsDatabase, LocationDatabaseAzure>();
+            Mvx.LazyConstructAndRegisterSingleton<IGeoCoder, GeoCoder>();
             //uncomment the below if you only want to use local storage
             //Mvx.LazyConstructAndRegisterSingleton<ILocationsDatabase, LocationsDatabase>();
             base.InitializeFirstChance();
