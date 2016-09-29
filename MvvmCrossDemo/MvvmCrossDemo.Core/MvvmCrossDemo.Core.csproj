@@ -54,6 +54,7 @@
     <Compile Include="Services\WeatherService.cs" />
     <Compile Include="ViewModels\LocationSearchViewModel.cs" />
     <Compile Include="ViewModels\ForecastViewModel.cs" />
+    <Compile Include="ViewModels\ParentViewModel.cs" />
     <Compile Include="ViewModels\WeatherMapViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

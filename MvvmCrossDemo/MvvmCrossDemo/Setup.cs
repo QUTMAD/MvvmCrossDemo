@@ -8,6 +8,9 @@ using MvvmCrossDemo.Droid.Database;
 using MvvmCrossDemo.Droid.Services;
 using MvvmCrossDemo.Core.Database;
 using MvvmCrossDemo.Droid.Maps;
+using MvvmCross.Droid.Views;
+using MvvmCross.Droid.Shared.Presenter;
+using Android.App;
 
 namespace MvvmCrossDemo.Droid
 {
@@ -38,6 +41,13 @@ namespace MvvmCrossDemo.Droid
             //uncomment the below if you only want to use local storage
             //Mvx.LazyConstructAndRegisterSingleton<ILocationsDatabase, LocationsDatabase>();
             base.InitializeFirstChance();
+        }
+
+        protected override IMvxAndroidViewPresenter CreateViewPresenter()
+        {
+            var mvxFragmentsPresenter = new MvxFragmentsPresenter(AndroidViewAssemblies);
+            Mvx.RegisterSingleton<IMvxAndroidViewPresenter>(mvxFragmentsPresenter);
+            return mvxFragmentsPresenter;
         }
     }
 }

@@ -11,25 +11,26 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Droid.Views;
 using MvvmCrossDemo.Core.ViewModels;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.FullFragging.Fragments;
+using MvvmCross.Binding.Droid.BindingContext;
 
 namespace MvvmCrossDemo.Droid.Views
 {
-    [Activity(Label = "Forecast")]
-    public class ForecastView : MvxActivity
+    [MvxFragment(typeof(ParentViewModel), Resource.Id.frameLayout)]
+    [Register("mvvmcrossdemo.droid.ForecastView")]
+    public class ForecastView : MvxFragment<ForecastViewModel>
     {
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            
-            base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.ForecastView);
-            // Create your application here
+            return this.BindingInflate(Resource.Layout.ForecastView, container);
         }
-        protected override void OnResume()
+        public override void OnResume()
         {
-            var vm = (ForecastViewModel)ViewModel;
-            vm.OnResume();
+            //ViewModel.OnResume();
             base.OnResume();
         }
+
     }
 }

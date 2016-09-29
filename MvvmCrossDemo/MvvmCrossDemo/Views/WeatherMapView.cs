@@ -14,24 +14,29 @@ using Android.Gms.Maps;
 using Android.Gms.Maps.Model;
 using MvvmCrossDemo.Core.ViewModels;
 using MvvmCrossDemo.Core.Models;
+using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.FullFragging.Fragments;
 
 namespace MvvmCrossDemo.Droid.Views
 {
-    [Activity(Label = "WeatherMapView")]
-    public class WeatherMapView : MvxActivity, IOnMapReadyCallback
+    [MvxFragment(typeof(ParentViewModel),Resource.Id.frameLayout)]
+    [Register("mvvmcross.droid.WeatherMap")]
+    public class WeatherMapView : MvxFragment, IOnMapReadyCallback
     {
         private delegate IOnMapReadyCallback OnMapReadyCallback();
         private GoogleMap map;
         WeatherMapViewModel vm;
-        protected override void OnCreate(Bundle savedInstanceState)
+        public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.WeatherMap);
-            vm = ViewModel as WeatherMapViewModel;
-            var mapFragment = FragmentManager.FindFragmentById(Resource.Id.weathermap) as MapFragment;
-            mapFragment.GetMapAsync(this);
+            //vm = ViewModel as WeatherMapViewModel;
+            //var mapFragment = FragmentManager.FindFragmentById(Resource.Id.weathermap) as SupportMapFragment;
+            //mapFragment.GetMapAsync(this);
         }
-
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            return inflater.Inflate(Resource.Layout.WeatherMap, container, false);
+        }
         public void OnMapReady(GoogleMap googleMap)
         {
             vm.OnMapSetup(MoveToLocation, AddWeatherPin);
@@ -74,5 +79,6 @@ namespace MvvmCrossDemo.Droid.Views
             markerOptions.SetTitle(location.Locality);
             map.AddMarker(markerOptions);
         }
+
     }
 }
