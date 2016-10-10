@@ -1,6 +1,7 @@
 using Android.App;
 using Android.Content.PM;
 using MvvmCross.Droid.Views;
+using ZXing.Mobile;
 
 namespace MvvmCrossDemo.Droid
 {
@@ -15,6 +16,7 @@ namespace MvvmCrossDemo.Droid
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)
         {
+            MobileBarcodeScanner.Initialize(this.Application);
         }
     }
 }

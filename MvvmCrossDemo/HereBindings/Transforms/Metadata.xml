@@ -1,0 +1,17 @@
+<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+  <attr path="/api/package[@name='com.here.android.mpa.search']/class[@name='ImageMedia']/method[@name='getUrl' and count(parameter)=0]" name="visibility">
+    protected
+  </attr>
+  <remove-node path="/api/package[@name='com.here.android.mpa.mapping']/class[@name='MapObject']"/>
+  <remove-node path="/api/package[@name='com.here.android.mpa.search']/class[@name='EditorialMedia']"/>
+  <remove-node path="/api/package[@name='com.here.android.mpa.search']/class[@name='Media']"/>
+  <remove-node path="/api/package[@name='com.here.android.mpa.search']/class[@name='MediaCollectionPage']"/>
+  <remove-node path="/api/package[@name='com.here.android.mpa.common']/class[@name='Image']"/>
+</metadata>

@@ -1,4 +1,5 @@
 ﻿using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using MvvmCrossDemo.Core.Interfaces;
 using MvvmCrossDemo.Core.Models;
 using MvvmCrossDemo.Core.Services;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZXing.Mobile;
 
 namespace MvvmCrossDemo.Core.ViewModels
 {
@@ -21,10 +23,29 @@ namespace MvvmCrossDemo.Core.ViewModels
             get { return myLocation; }
             set { myLocation = value; }
         }
+        public override void Start()
+        {
+            NewMethod();
 
+            base.Start();
+        }
+
+        private async void NewMethod()
+        {
+            //Prithwi
+            IMobileBarcodeScanner scanner;
+            var x = Mvx.TryResolve<IMobileBarcodeScanner>(out scanner);
+            scanner.ScanContinuously(OnResult);
+        }
+
+        public void OnResult (ZXing.Result result)
+        {
+            var barcode = result.Text;
+        }
         public WeatherMapViewModel(IGeoCoder geocoder)
         {
             this.geocoder = geocoder;
+           
         }
         public void OnMyLocationChanged(GeoLocation location)
         {

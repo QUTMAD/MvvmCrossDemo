@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCrossDemo.Core", "MvvmC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QutMadSem22016Wednesday3Service", "QutMadSem22016Wednesday3Service\QutMadSem22016Wednesday3Service.csproj", "{209FA716-A7AD-4095-BD70-C8710FC66FA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HereBindings", "HereBindings\HereBindings.csproj", "{E6CCBFDB-42C7-450F-8AFE-E8B6B479DD6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,12 @@ Global
 		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{209FA716-A7AD-4095-BD70-C8710FC66FA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6CCBFDB-42C7-450F-8AFE-E8B6B479DD6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6CCBFDB-42C7-450F-8AFE-E8B6B479DD6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6CCBFDB-42C7-450F-8AFE-E8B6B479DD6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB1B2DA-6172-468C-96A0-9BAB2F1FF888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB1B2DA-6172-468C-96A0-9BAB2F1FF888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB1B2DA-6172-468C-96A0-9BAB2F1FF888}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
