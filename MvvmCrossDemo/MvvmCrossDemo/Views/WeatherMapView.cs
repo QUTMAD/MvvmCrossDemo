@@ -32,11 +32,6 @@ namespace MvvmCrossDemo.Droid.Views
             vm = ViewModel as WeatherMapViewModel;
             var mapFragment = FragmentManager.FindFragmentById(Resource.Id.weathermap) as MapFragment;
             mapFragment.GetMapAsync(this);
-            MobileBarcodeScanner.Initialize(this.Application);
-            
-            var x = Mvx.TryResolve<IMobileBarcodeScanner>(out vm.scanner);
-            vm.StartScanning();
-
         }
 
         public void OnMapReady(GoogleMap googleMap)

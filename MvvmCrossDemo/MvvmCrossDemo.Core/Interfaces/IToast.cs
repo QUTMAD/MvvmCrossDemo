@@ -1,5 +1,4 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MvvmCrossDemo.Core.Interfaces
 {
-    public interface IAzureDatabase
+    public interface IToast
     {
-        MobileServiceClient GetMobileServiceClient();
+        void Show(string message);
     }
 }

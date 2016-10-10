@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent">
+  <Button 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Click to scan once"
+    local:MvxBind="Click ScanOnceCommand"/>
+  <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Click to scan Continuously"
+    local:MvxBind="Click ScanContinuouslyCommand"/>
+  <MvxListView
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:textSize="40dp"
+       local:MvxBind="ItemsSource Barcodes; ItemClick GenerateQRCodeCommand"/>
+</LinearLayout>

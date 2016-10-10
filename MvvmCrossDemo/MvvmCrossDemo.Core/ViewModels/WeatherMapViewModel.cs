@@ -18,7 +18,6 @@ namespace MvvmCrossDemo.Core.ViewModels
         private IGeoCoder geocoder;
         private Action<GeoLocation,float> moveToLocation;
         private Action<GeoLocation,Forecast> weatherPinFound;
-        public IMobileBarcodeScanner scanner;
         public GeoLocation MyLocation
         {
             get { return myLocation; }
@@ -26,17 +25,7 @@ namespace MvvmCrossDemo.Core.ViewModels
         }
         public override void Start()
         {
-
             base.Start();
-        }
-
-        public void StartScanning()
-        {
-            scanner.ScanContinuously(OnResult);
-        }
-        public void OnResult(ZXing.Result result)
-        {
-            var barcode = result.Text;
         }
 
         public WeatherMapViewModel(IGeoCoder geocoder)
