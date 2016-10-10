@@ -23,6 +23,8 @@ namespace MvvmCrossDemo.Core.ViewModels
             set { SetProperty(ref barcodes, value); }
         }
 
+       
+
         public ICommand GenerateQRCodeCommand { get; private set; }
         public ICommand ScanOnceCommand { get; private set; }
         public ICommand ScanContinuouslyCommand { get; private set; }
@@ -32,7 +34,7 @@ namespace MvvmCrossDemo.Core.ViewModels
         {
             GenerateQRCodeCommand = new MvxCommand<string>(selectedBarcode =>
             {
-                //TODO geneerate the QR Code
+                ShowViewModel<BarcodeViewModel>(new { param = selectedBarcode });
             });
             ScanOnceCommand = new MvxCommand(ScanOnce);
             ScanContinuouslyCommand = new MvxCommand(ScanContinuously);

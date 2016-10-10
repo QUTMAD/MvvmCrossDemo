@@ -38,6 +38,7 @@ namespace MvvmCrossDemo.Droid
             Mvx.LazyConstructAndRegisterSingleton<IGeoCoder, GeoCoder>();
             Mvx.LazyConstructAndRegisterSingleton<IMobileBarcodeScanner, MobileBarcodeScanner>();
             Mvx.LazyConstructAndRegisterSingleton<IToast, ToastService>();
+            Mvx.LazyConstructAndRegisterSingleton<IQRCodeGenerator, QRCodeGenerator>();
             //uncomment the below if you only want to use local storage
             //Mvx.LazyConstructAndRegisterSingleton<ILocationsDatabase, LocationsDatabase>();
             base.InitializeFirstChance();
