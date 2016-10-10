@@ -16,7 +16,6 @@ namespace MvvmCrossDemo.Droid
         public SplashScreen()
             : base(Resource.Layout.SplashScreen)
         {
-            MobileBarcodeScanner.Initialize(this.Application);
         }
     }
 }
