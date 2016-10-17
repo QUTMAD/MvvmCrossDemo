@@ -5,6 +5,9 @@ using EstimoteSdk;
 using MvvmCross.Droid.Views;
 using BeaconsDemo.Core.ViewModels;
 using EstimoteSdk.EddystoneSdk;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BeaconsDemo.Droid.Views
 {
@@ -35,7 +38,9 @@ namespace BeaconsDemo.Droid.Views
         private void BeaconManager_Eddystone(object sender, BeaconManager.EddystoneEventArgs e)
         {
             vm.EddyStoneList.Clear();
-            foreach (var stone in e.Eddystones)
+            var eddys = new List<Eddystone>(e.Eddystones);
+            var sortedEddys = eddys.OrderBy(ed => ed.Rssi);
+            foreach (var stone in sortedEddys)
             {
                 vm.EddyStoneList.Add(new Core.Models.EddyStone
                 {
