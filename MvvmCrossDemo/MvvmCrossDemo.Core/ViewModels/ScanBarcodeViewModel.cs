@@ -59,7 +59,7 @@ namespace MvvmCrossDemo.Core.ViewModels
         public override void Start()
         {
             base.Start();
-            var x = Mvx.TryResolve<IMobileBarcodeScanner>(out scanner);
+            var x = Mvx.TryResolve(out scanner);
         }
     }
 }
