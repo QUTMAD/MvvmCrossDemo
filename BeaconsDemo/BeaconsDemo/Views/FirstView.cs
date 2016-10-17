@@ -4,6 +4,7 @@ using Android.OS;
 using EstimoteSdk;
 using MvvmCross.Droid.Views;
 using BeaconsDemo.Core.ViewModels;
+using EstimoteSdk.EddystoneSdk;
 
 namespace BeaconsDemo.Droid.Views
 {
@@ -18,9 +19,7 @@ namespace BeaconsDemo.Droid.Views
         public void OnServiceReady()
         {
             isScanning = true;
-            scanId = beaconManager.StartNearableDiscovery();
             edScanId = beaconManager.StartEddystoneScanning();
-
         }
 
         protected override void OnCreate(Bundle bundle)
@@ -29,26 +28,26 @@ namespace BeaconsDemo.Droid.Views
             SetContentView(Resource.Layout.FirstView);
             vm = this.ViewModel as FirstViewModel;
             beaconManager = new BeaconManager(this);
-            beaconManager.Nearable += BeaconManager_Nearable;
-            //beaconManager.Eddystone += BeaconManager_Eddystone;
-            beaconManager.Telemetry += BeaconManager_Telemetry;
+            beaconManager.Eddystone += BeaconManager_Eddystone;
             beaconManager.Connect(this);
         }
 
-        private void BeaconManager_Telemetry(object sender, BeaconManager.TelemetryEventArgs e)
+        private void BeaconManager_Eddystone(object sender, BeaconManager.EddystoneEventArgs e)
         {
-            vm.BeaconStatus = string.Format("Found {0} eddystones at {1}", e.P0.Count, DateTime.Now);
-
-        }
-
-        //private void BeaconManager_Eddystone(object sender, BeaconManager.EddystoneEventArgs e)
-        //{
-        //    vm.BeaconStatus = string.Format("Found {0} eddystones at {1}", e.Eddystones.Count, DateTime.Now);
-        //}
-
-        private void BeaconManager_Nearable(object sender, BeaconManager.NearableEventArgs e)
-        {
-            vm.EddyStoneStatus = string.Format("Found {0} nearables at {1}", e.Nearables.Count, DateTime.Now);
+            vm.EddyStoneList.Clear();
+            foreach (var stone in e.Eddystones)
+            {
+                vm.EddyStoneList.Add(new Core.Models.EddyStone
+                {
+                    CalibratedTxPower = stone.CalibratedTxPower,
+                    Instance = stone.Instance,
+                    MacAddress = stone.MacAddress.ToString(),
+                    Namespace = stone.Namespace,
+                    Rssi = stone.Rssi,
+                    TelemetryLastSeenMillis = Convert.ToInt16(stone.TelemetryLastSeenMillis),
+                    Url = stone.Url
+                });
+            }
         }
 
         protected override void OnStop()
@@ -58,7 +57,6 @@ namespace BeaconsDemo.Droid.Views
             {
                 return;
             }
-            beaconManager.StopNearableDiscovery(scanId);
             beaconManager.StopEddystoneScanning(edScanId);
         }
         protected override void OnDestroy()

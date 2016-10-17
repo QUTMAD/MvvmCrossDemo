@@ -1,23 +1,17 @@
+using BeaconsDemo.Core.Models;
 using MvvmCross.Core.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace BeaconsDemo.Core.ViewModels
 {
-    public class FirstViewModel 
+    public class FirstViewModel
         : MvxViewModel
     {
-        private string beaconStatus;
-
-        public string BeaconStatus
+        private ObservableCollection<EddyStone> eddyStoneList = new ObservableCollection<EddyStone>();
+        public ObservableCollection<EddyStone> EddyStoneList
         {
-            get { return beaconStatus; }
-            set { SetProperty(ref beaconStatus, value); }
-        }
-        private string eddyStoneStatus;
-
-        public string EddyStoneStatus
-        {
-            get { return eddyStoneStatus; }
-            set { SetProperty(ref eddyStoneStatus, value); }
+            get { return eddyStoneList; }
+            set { SetProperty(ref eddyStoneList, value); }
         }
 
     }
