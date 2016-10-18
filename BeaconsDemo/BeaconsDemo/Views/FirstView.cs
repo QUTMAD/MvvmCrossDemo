@@ -16,7 +16,6 @@ namespace BeaconsDemo.Droid.Views
     {
         FirstViewModel vm;
         BeaconManager beaconManager;
-        string scanId;
         string edScanId;
         bool isScanning;
         public void OnServiceReady()
@@ -39,7 +38,7 @@ namespace BeaconsDemo.Droid.Views
         {
             vm.EddyStoneList.Clear();
             var eddys = new List<Eddystone>(e.Eddystones);
-            var sortedEddys = eddys.OrderBy(ed => ed.Rssi);
+            var sortedEddys = eddys.OrderByDescending(ed => ed.Rssi);
             foreach (var stone in sortedEddys)
             {
                 vm.EddyStoneList.Add(new Core.Models.EddyStone
